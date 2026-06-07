@@ -8,7 +8,7 @@ Stack: Next.js 14 + Supabase + Clerk + Gemini + Resend + Vercel
 
 | Phase | Module | Durée | Statut |
 |-------|--------|-------|--------|
-| 0 | Setup + Landing + Auth (Clerk) | 1.5 semaine | ⏳ À commencer |
+| 0 | Setup + Landing + Auth (Clerk) | 1.5 semaine | 🔄 En cours (~40%) |
 | 1 | RAG + Agent IA (Gemini + pgvector) | 2.5 semaines | ⏳ À commencer |
 | 2 | Portail Citoyen | 2.5 semaines | ⏳ À commencer |
 | 3 | Portail Avocat | 2.5 semaines | ⏳ À commencer |
@@ -44,22 +44,22 @@ Stack: Next.js 14 + Supabase + Clerk + Gemini + Resend + Vercel
 - [ ] `004_webhook_sync.sql` — fonction sync Clerk → Supabase
 
 #### Clerk — Auth
-- [ ] Pages sign-in / sign-up (Clerk components)
+- [x] Pages sign-in / sign-up (Clerk components)
 - [ ] Webhook Clerk → sync users vers Supabase (`/api/webhooks/clerk`)
 - [ ] Attribution des rôles: `citoyen` / `avocat` / `admin`
 - [ ] Redirection automatique selon le rôle après login
 - [ ] Protection des routes dans `middleware.ts`
 
 #### Landing Page (`src/app/page.tsx`)
-- [ ] Navbar avec logo Thémis + boutons connexion
-- [ ] Hero section + badge + CTA buttons
-- [ ] Section problème (3 cards)
-- [ ] Section "Comment ça marche" (3 étapes)
-- [ ] Section features (citoyen + avocat)
-- [ ] CTA final
-- [ ] Footer avec langues
-- [ ] Responsive mobile + desktop
-- [ ] Trilingue (fr/ar/en)
+- [x] Navbar avec logo Thémis + boutons connexion
+- [x] Hero section + badge + CTA buttons
+- [x] Section problème (3 cards)
+- [x] Section "Comment ça marche" (3 étapes)
+- [x] Section features (citoyen + avocat)
+- [x] CTA final
+- [x] Footer avec langues
+- [x] Responsive mobile + desktop
+- [ ] Trilingue (fr/ar/en) — i18n non câblé, prochaine tâche
 
 ### Gate 0 Sign-off ✅
 - [ ] `npm run build` — 0 erreurs
@@ -313,6 +313,6 @@ Stack: Next.js 14 + Supabase + Clerk + Gemini + Resend + Vercel
 
 ---
 
-*Dernière mise à jour: Mai 2026*
+*Dernière mise à jour: 2026-06-07*
 *Stack: Next.js 14 + Supabase + Clerk + Gemini + Resend + Vercel*
 *Tout agent modifiant ce fichier doit mettre à jour la date ci-dessus.*

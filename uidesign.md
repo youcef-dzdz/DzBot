@@ -3,7 +3,7 @@
 > Règle #8 de CLAUDE.md : aucune couleur, espacement ou ombre ne peut être hardcodé sans être listé ici.
 > Toute valeur non listée = interdite. Toute nouvelle valeur = ajoutée ici AVANT d'être utilisée.
 
-Dernière mise à jour: Mai 2026
+Dernière mise à jour: 2026-06-07
 Palette validée par le fondateur: **Espresso + Crème Claude + Or**
 
 ---
@@ -166,6 +166,7 @@ frontend/public/
 
 | Token | Taille | Poids | Line-height | Usage |
 |-------|--------|-------|-------------|-------|
+| `text-hero` | `48px` | `700` | `1.15` | Titre principal hero landing (`LandingHero.tsx`) |
 | `text-display` | `36px` | `700` | `1.2` | Hero title landing |
 | `text-h1` | `28px` | `700` | `1.25` | Titre page principale |
 | `text-h2` | `22px` | `700` | `1.3` | Section title |
@@ -177,6 +178,8 @@ frontend/public/
 | `text-label` | `12px` | `500` | `1.4` | Labels formulaires |
 | `text-caption` | `11px` | `400` | `1.5` | Timestamps, hints |
 | `text-micro` | `10px` | `500` | `1.4` | Section labels uppercase |
+
+> ⚠️ **Note:** `tailwind.config.ts` ne définit pas encore les utilitaires `fontSize` correspondant à cette échelle (`text-h1`, `text-display`, etc.). Les composants landing utilisent donc des valeurs arbitraires (`text-[28px]`, `text-[48px]`) qui correspondent aux tokens `text-h1` (28px) et `text-hero` (48px) ci-dessus. À corriger en ajoutant `fontSize` à la config Tailwind pour que les classes nommées soient utilisables directement.
 
 ### Règles RTL Arabe
 
@@ -446,7 +449,7 @@ export default config
 
 ---
 
-*Dernière mise à jour: Mai 2026*
+*Dernière mise à jour: 2026-06-07*
 *Palette validée: Espresso #3B1E03 + Crème #FAF9F7 + Or #C4902A + Beige #F2EDE6*
 *Logo validé: Thémis silhouette espresso, balance & épée or, wordmark "LegalBot DZ"*
 *Tout agent modifiant ce fichier doit mettre à jour la date ci-dessus.*

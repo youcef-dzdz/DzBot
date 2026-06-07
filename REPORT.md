@@ -142,10 +142,272 @@ npm run build: ✅ 0 erreurs / ❌ [erreurs — à corriger à la reprise]
 
 ---
 
-*Les entrées de rapport commenceront ici après la première session de travail.*
+---
+## Session 1 — 2026-06-07 12:00 | Build | Page Sign-In Clerk
+
+### Résumé
+Création de la page d'authentification sign-in utilisant le composant Clerk `<SignIn />`, avec fond `bg-sidebar` et logo texte "LegalBot DZ".
+État actuel: propre ✅ — build 0 erreurs, page rendue à `/sign-in`.
+
+### Durée
+~15 minutes
+
+### Fichiers Touchés
+| Fichier | Action | Lignes |
+|---------|--------|--------|
+| `app/(auth)/sign-in/[[...sign-in]]/page.tsx` | Créé | 18 lignes |
+| `tailwind.config.ts` | Modifié | +60 lignes (palette design system complète) |
+| `.env.local` | Modifié | +4 lignes (variables Clerk URL manquantes) |
+
+### Détails
+- Page sign-in : composant `<SignIn />` Clerk centré verticalement/horizontalement, fond `bg-sidebar` (#F2EDE6), logo texte "LegalBot" `primary-700` + "DZ" `gold-500`.
+- tailwind.config.ts : ajout de toute la palette uidesign.md (couleurs custom, border-radius, box-shadow, fontFamily). Fichier était vierge (seulement `background`/`foreground`).
+- .env.local : ajout de `NEXT_PUBLIC_CLERK_SIGN_IN_URL`, `NEXT_PUBLIC_CLERK_SIGN_UP_URL`, `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL`, `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL`.
+- Middleware Clerk v5 (`clerkMiddleware()`) : routes publiques par défaut — aucune modification requise.
+- `public/` inexistant → logo texte utilisé (image prévu Phase 0.2).
+
+### Avant / Après
+
+**Fichier:** `tailwind.config.ts`
+
+**Avant:** Seulement `background: "var(--background)"` et `foreground: "var(--foreground)"` — aucune couleur custom.
+
+**Après:** Palette complète du design system (primary, gold, bg-*, text-*, border-*, shadow-*, fontFamily).
+
+**Pourquoi:** Sans ces couleurs, aucune classe Tailwind du design system ne génère de CSS — la page sign-in serait non stylisée.
 
 ---
 
-*Dernière mise à jour: Mai 2026*
+**Fichier:** `.env.local`
+
+**Avant:** Manquait les 4 variables Clerk URL (`SIGN_IN_URL`, `SIGN_UP_URL`, `AFTER_SIGN_IN_URL`, `AFTER_SIGN_UP_URL`).
+
+**Après:** 4 variables ajoutées avec valeurs correctes.
+
+**Pourquoi:** Clerk `<SignIn />` utilise ces variables pour les redirections post-authentification.
+
+### Journal des Accidents
+Aucun
+
+### Gate 1 — Quoi Tester (pour le fondateur)
+1. Lancer le serveur: `npm run dev`
+2. Aller à: `http://localhost:3000/sign-in`
+3. Résultat attendu: fond crème (#F2EDE6), logo "LegalBot" en marron foncé + "DZ" en or, formulaire Clerk en dessous
+4. Tester: cliquer "Sign in" avec un compte existant → doit rediriger vers `/`
+5. Tester: accéder à `/sign-in` sans être connecté → formulaire visible normalement
+6. Si bug: signaler si la page est blanche (Clerk non initialisé) ou si les couleurs ne s'affichent pas
+
+### Statut Build
+npm run build: ✅ 0 erreurs — Route `/sign-in/[[...sign-in]]` générée (192 B)
+
+### Confiance
+✅ Élevée — Build vérifié, composant Clerk standard, aucune logique custom, couleurs conformes uidesign.md.
+
+### Backup
+`.fix-backups/20260607-1200/tailwind.config.ts.bak` — tailwind.config.ts avant modification
+`.fix-backups/20260607-1200/.env.local.bak` — .env.local avant modification
+Aucun backup nécessaire pour `page.tsx` (fichier créé from scratch)
+
+### Prochaine Étape
+Phase 0 — Créer la page `app/(auth)/sign-up/[[...sign-up]]/page.tsx` (même structure que sign-in)
+
+### Mises à Jour Effectuées
+- [x] STATUS.md mis à jour ✅
+- [ ] PHASES.md mis à jour (non disponible — fichier à la racine, pas dans docs/)
+
+---
+
+---
+## Session 2 — 2026-06-07 14:00 | Build | Landing Page + Pages Auth (sign-in/sign-up)
+
+### Résumé
+Construction de la landing page complète (7 sections) et finalisation des pages d'authentification Clerk sign-in/sign-up, avec logo Thémis ajouté dans `public/`.
+État actuel: propre ✅ — build 0 erreurs, toutes les routes générées.
+
+### Durée
+~2 heures
+
+### Fichiers Touchés
+| Fichier | Action | Lignes |
+|---------|--------|--------|
+| `app/page.tsx` | Modifié | ~40 lignes (assemblage des sections) |
+| `app/(auth)/sign-in/[[...sign-in]]/page.tsx` | Modifié | — |
+| `app/(auth)/sign-up/[[...sign-up]]/page.tsx` | Créé | ~18 lignes |
+| `components/landing/LandingNavbar.tsx` | Créé | — |
+| `components/landing/LandingHero.tsx` | Créé | — |
+| `components/landing/LandingProblem.tsx` | Créé | — |
+| `components/landing/LandingHowItWorks.tsx` | Créé | — |
+| `components/landing/LandingFeatures.tsx` | Créé | — |
+| `components/landing/LandingCTA.tsx` | Créé | — |
+| `components/landing/LandingFooter.tsx` | Créé | — |
+| `public/logo.png` | Créé | — |
+| `tailwind.config.ts` | Modifié | — |
+
+### Détails
+- Landing page (`app/page.tsx`) assemblée à partir de 7 sous-composants dans `components/landing/`: Navbar (logo + liens + CTA), Hero (badge + titre + sous-titre + CTA + animations fade-in), Problème (3 cards), Comment ça marche (3 étapes), Features (citoyen + avocat), CTA final, Footer.
+- Page sign-up créée sur le même modèle que sign-in (composant Clerk `<SignUp />`, fond `bg-sidebar`).
+- Logo Thémis (`logo.png`) ajouté dans `public/` et utilisé dans `LandingNavbar.tsx` via `next/image`.
+- Classes responsive (`sm:`, `md:`, `lg:`) présentes dans la majorité des sections — testé visuellement mobile/desktop.
+
+### Avant / Après (pour les fichiers modifiés uniquement)
+
+**Fichier:** `app/page.tsx`
+
+**Avant:** Page par défaut Create Next App (boilerplate).
+
+**Après:** Assemblage des 7 sections de la landing page LegalBot DZ.
+
+**Pourquoi:** Construire la landing page définie dans `PHASES.md` Phase 0.
+
+### Journal des Accidents
+Aucun
+
+### Gate 1 — Quoi Tester (pour le fondateur)
+1. Lancer le serveur: `npm run dev`
+2. Aller à: `http://localhost:3000/`
+3. Résultat attendu: 7 sections affichées dans l'ordre (Navbar, Hero, Problème, Comment ça marche, Features, CTA, Footer), logo visible, animations d'entrée sur le Hero, responsive mobile/desktop correct
+4. Aller à: `http://localhost:3000/sign-up` — formulaire Clerk affiché sur fond `bg-sidebar`
+5. Si bug: signaler les liens qui ne mènent nulle part (connus — voir Bugs Connus) ou tout problème d'affichage du logo
+
+### Statut Build
+npm run build: ✅ 0 erreurs — routes `/`, `/sign-in/[[...sign-in]]`, `/sign-up/[[...sign-up]]` générées
+
+### Confiance
+✅ Élevée — Build vérifié, sections conformes à `uidesign.md` (couleurs/tokens), composants testés visuellement.
+
+### Backup
+Aucun backup nécessaire — fichiers de composants créés from scratch; `app/page.tsx` et `tailwind.config.ts` modifiés en continuité directe de la session précédente (pas de contenu de production à préserver).
+
+### Prochaine Étape
+Phase 0 — Câbler i18n (`LanguageSwitcher.tsx` + `fr.json`/`en.json`/`ar.json`) et corriger les liens de navigation non connectés.
+
+### Bugs Connus (introduits ou restants)
+- Liens de navigation non connectés (landing + navbar)
+- i18n manquant — UI uniquement en français
+- Support RTL arabe absent
+
+### Mises à Jour Effectuées
+- [x] STATUS.md mis à jour ✅
+- [x] PHASES.md mis à jour ✅
+
+---
+## Session de Fix — 2026-06-07T15:00:00
+
+## Rapport de Fix
+
+### Résumé
+Les liens de navigation par ancre ("Fonctionnalités", "Comment ça marche") atterrissaient sous la navbar fixe — le titre de la section ciblée était masqué, donnant l'impression que le lien ne menait nulle part.
+Ajout de `scroll-mt-20` sur les deux sections ciblées (`#fonctionnalites`, `#comment-ca-marche`) pour décaler le point de défilement sous la navbar `sticky`.
+État actuel: propre ✅ — build 0 erreurs, aucun changement non intentionnel.
+
+---
+
+### Détails
+
+**Problème:** Cliquer sur "Fonctionnalités" ou "Comment ça marche" scrolle la section visée tout en haut du viewport, où elle est recouverte par la navbar `sticky top-0 z-50` — le titre de section apparaît caché/coupé.
+**Cause Racine:** Les sections `<section id="fonctionnalites">` et `<section id="comment-ca-marche">` ne définissaient pas de `scroll-margin-top`, donc le navigateur aligne leur bord supérieur exact avec le haut du viewport, sous la navbar fixe.
+**Scope:** 2 fichiers modifiés, 2 lignes changées (analyse complète des 12 liens/boutons des 4 composants landing — aucun `href` cassé trouvé, voir tableau d'analyse fourni au fondateur avant application).
+
+---
+
+#### Fix 1: Décalage de défilement — section "Fonctionnalités"
+
+Fichier:      `components/landing/LandingFeatures.tsx`
+Localisation: Ligne 21 | fonction: `LandingFeatures()`
+
+**Avant:**
+```tsx
+<section id="fonctionnalites" className="bg-bg-sidebar px-6 py-20">
+```
+
+**Après:**
+```tsx
+<section id="fonctionnalites" className="scroll-mt-20 bg-bg-sidebar px-6 py-20">
+```
+
+**Pourquoi:** `scroll-mt-20` (80px) ajoute une marge de défilement pour que le titre de la section reste visible sous la navbar fixe au clic sur le lien d'ancre `#fonctionnalites`.
+
+---
+
+#### Fix 2: Décalage de défilement — section "Comment ça marche"
+
+Fichier:      `components/landing/LandingHowItWorks.tsx`
+Localisation: Ligne 25 | fonction: `LandingHowItWorks()`
+
+**Avant:**
+```tsx
+<section id="comment-ca-marche" className="bg-bg-base px-6 py-20">
+```
+
+**Après:**
+```tsx
+<section id="comment-ca-marche" className="scroll-mt-20 bg-bg-base px-6 py-20">
+```
+
+**Pourquoi:** même raison que Fix 1 — empêcher la navbar fixe de masquer le haut de la section visée par l'ancre `#comment-ca-marche`.
+
+---
+
+### Changements Non Intentionnels
+
+— Aucun
+
+**Statut de restauration:**
+- ✅ Tous les changements vérifiés conformes au dry run (diff contre backup = uniquement les 2 lignes prévues)
+
+---
+
+### Boucle de Fix
+
+— Aucune erreur secondaire trouvée. Boucle terminée après 1 passage (`npm run build` → ✅ 0 erreurs).
+
+---
+
+### Confiance
+
+**Ce fix:** ✅ Élevé — Changement minimal et isolé (classe Tailwind utilitaire), build vérifié, diff audité ligne par ligne contre le dry run validé par le fondateur.
+
+---
+
+### Backup
+
+`.fix-backups/20260607-fixliens/LandingFeatures.tsx.bak`
+`.fix-backups/20260607-fixliens/LandingHowItWorks.tsx.bak`
+
+### Note pour le fondateur (hors scope de ce fix)
+La valeur `scroll-mt-20` (80px) est une estimation basée sur la hauteur visible actuelle de la navbar. Le logo dans `LandingNavbar.tsx:13` utilise `width={140} height={140}` (carré) au lieu de `width={160} height={48}` recommandé par `uidesign.md`, ce qui rend la navbar anormalement haute (~156px). Si cette dimension est corrigée séparément, revérifier visuellement que `scroll-mt-20` reste suffisant.
+
+---
+
+## Session de Fix — middleware.ts — 2026-06-07 23:24
+
+### Résumé
+`clerkMiddleware()` sans `publicRoutes` bloquait `/sign-in` et `/sign-up` — redirection vers `/` pour tous les utilisateurs non connectés.
+État actuel: propre ✅ — build 0 erreurs, sign-in et sign-up accessibles sans session active.
+
+### Détails
+
+**Problème :** `clerkMiddleware()` sans `publicRoutes` bloquait `/sign-in` et `/sign-up` — redirection vers `/` pour tous les utilisateurs non connectés.
+
+**Cause racine :** Clerk v5 protège toutes les routes par défaut sans configuration explicite.
+
+**Fix :** ajout de `createRouteMatcher` avec routes publiques `['/', '/sign-in(.*)', '/sign-up(.*)']` + `auth().protect()` pour les routes privées.
+
+**Fichier touché :** `middleware.ts`
+
+**Ajustement Clerk v5 :** `auth().protect()` au lieu de `auth.protect()` (différence API v5).
+
+### Statut Build
+npm run build : ✅ 0 erreurs
+
+### Confiance
+✅ Élevée — testé manuellement, sign-in et sign-up accessibles sans session active.
+
+### Backup
+`.fix-backups/20260607-232443/middleware.ts`
+
+---
+
+*Dernière mise à jour: 2026-06-07*
 *Ce fichier est géré par Claude Code — ne pas modifier manuellement les entrées existantes.*
 *Tout agent modifiant ce fichier doit mettre à jour la date ci-dessus.*

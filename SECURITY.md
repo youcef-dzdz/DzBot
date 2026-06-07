@@ -3,7 +3,7 @@
 > LegalBot DZ traite des données juridiques ultra-sensibles. Une faille de sécurité
 > peut causer un préjudice légal réel aux utilisateurs et détruire la crédibilité du projet.
 
-Dernière mise à jour: Mai 2026
+Dernière mise à jour: 2026-06-07
 
 ---
 
@@ -620,12 +620,25 @@ async def login(request: LoginRequest, db: Session = Depends(get_db)):
 > Cette section sera complétée au fur et à mesure du développement.
 > Chaque feature de sécurité implémentée sera documentée ici.
 
-```
-[Vide pour l'instant — projet non encore démarré]
-```
+### Landing Page (`app/page.tsx` + `components/landing/*.tsx`)
+- ✅ Aucune donnée sensible affichée — page 100% statique, contenu marketing uniquement
+- ✅ Aucune clé API exposée — aucun appel `fetch()` ni variable d'environnement référencée côté client
+- ✅ Logo servi via `next/image` depuis `public/` — pas d'URL externe
+
+### Pages Auth (`app/(auth)/sign-in/`, `app/(auth)/sign-up/`)
+- ✅ Authentification entièrement déléguée aux composants Clerk `<SignIn />` / `<SignUp />` — aucune logique custom de validation, hashing ou gestion de session côté projet
+- ✅ Pas de token stocké manuellement (Clerk gère cookies/session)
+
+### À Vérifier Quand Les Migrations Supabase Seront Faites
+- ⏳ RLS activé et testé sur `users`, `conversations`, `messages`, `dossiers`, `audiences` (Menace 9 — accès croisé)
+- ⏳ Webhook Clerk → Supabase (`004_webhook_sync.sql`) vérifie bien le rôle avant insertion (Menace 4)
+- ⏳ `SUPABASE_SERVICE_ROLE_KEY` confirmée server-side uniquement (jamais exposée au client) (Menace 1)
+- ⏳ Policy `lois_read_all` = lecture publique / écriture admin uniquement, vérifiée après `003_rls_policies.sql`
+
+> Sections RAG, agent IA, rate limiting — à compléter en Phase 1.
 
 ---
 
-*Dernière mise à jour: Mai 2026*
+*Dernière mise à jour: 2026-06-07*
 *Tout agent modifiant ce fichier doit mettre à jour la date ci-dessus.*
 *Ce fichier est un document vivant — le mettre à jour à chaque nouvelle menace découverte.*

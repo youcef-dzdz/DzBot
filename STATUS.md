@@ -1,5 +1,5 @@
 # STATUS.md — LegalBot DZ
-Dernière mise à jour: Mai 2026
+Dernière mise à jour: 2026-06-07
 
 ---
 
@@ -22,15 +22,18 @@ Dernière mise à jour: Mai 2026
 ## 🎯 Focus Actuel
 
 **Phase:** Phase 0 — Setup + Landing + Auth
-**Statut:** ⏳ À commencer
+**Statut:** 🔄 En cours (~40%)
 
 **Prochaine action concrète:**
-1. Installer Node.js
-2. Initialiser Next.js 14 + TypeScript
-3. Installer Clerk + Supabase
-4. Créer la structure des dossiers
+1. ~~Installer Node.js~~ ✅
+2. ~~Initialiser Next.js 14 + TypeScript~~ ✅
+3. ~~Installer Clerk + Supabase~~ ✅
+4. ~~Créer la page sign-in~~ ✅
+5. ~~Créer la page sign-up~~ ✅
+6. ~~Créer la landing page~~ ✅
+7. Câbler i18n (switcher fr/ar/en) + corriger les liens de navigation
 
-**Bloqué par:** Rien — prêt à commencer
+**Bloqué par:** Rien
 
 ---
 
@@ -52,7 +55,7 @@ Dernière mise à jour: Mai 2026
 
 | Phase | Statut | Progression |
 |-------|--------|-------------|
-| 0 — Setup + Landing + Auth | ⏳ À commencer | 0% |
+| 0 — Setup + Landing + Auth | 🔄 En cours | 40% |
 | 1 — Agent IA + RAG + pgvector | ⏳ À commencer | 0% |
 | 2 — Portail Citoyen | ⏳ À commencer | 0% |
 | 3 — Portail Avocat | ⏳ À commencer | 0% |
@@ -64,10 +67,10 @@ Dernière mise à jour: Mai 2026
 
 | Item | Valeur |
 |------|--------|
-| Date | Mai 2026 |
-| Tâche | Setup complet des fichiers MD + Design system validé |
-| Fichiers | CLAUDE.md, PHASES.md, STATUS.md, FIX.md, SECURITY.md, REPORT.md, uidesign.md |
-| Statut | ✅ Terminé |
+| Date | 2026-06-07 |
+| Tâche | Landing page (7 sections) + pages auth sign-in/sign-up |
+| Fichiers | `app/page.tsx`, `app/(auth)/sign-in/[[...sign-in]]/page.tsx`, `app/(auth)/sign-up/[[...sign-up]]/page.tsx`, `components/landing/*.tsx`, `public/logo.png` |
+| Statut | ✅ Terminé — build 0 erreurs |
 
 ---
 
@@ -76,15 +79,24 @@ Dernière mise à jour: Mai 2026
 | Item | Valeur |
 |------|--------|
 | Phase | 0 |
-| Tâche | Initialiser Next.js 14 + configurer Clerk + Supabase |
-| Durée estimée | ~3 heures |
-| Bloqué par | Node.js à installer |
+| Tâche | i18n (switcher fr/ar/en) + corriger les liens de navigation |
+| Durée estimée | — |
+| Bloqué par | Rien |
 
 ---
 
 ## 🐛 Bugs Connus
 
-✅ Aucun bug — projet non encore démarré
+| # | Description | Priorité |
+|---|-------------|---------|
+| 1 | i18n manquant — UI uniquement en français | 🟡 Important |
+| 2 | Support RTL arabe absent | 🟡 Important |
+
+## ✅ Correctifs Appliqués
+
+| # | Description | Statut |
+|---|-------------|--------|
+| 1 | middleware Clerk configuré | ✅ |
 
 ---
 
@@ -109,10 +121,10 @@ Dernière mise à jour: Mai 2026
 
 | Item | Statut |
 |------|--------|
-| Frontend (npm run build) | ❌ Projet non initialisé |
+| Frontend (npm run build) | ✅ 0 erreurs — 2026-06-07 (vérifié) |
 | Vercel Deployment | ❌ Non configuré |
 | Supabase Migrations | ❌ Non exécutées |
-| Dernière vérification | — |
+| Dernière vérification | 2026-06-07 |
 
 ---
 
@@ -132,6 +144,6 @@ Dernière mise à jour: Mai 2026
 
 ---
 
-*Dernière mise à jour: Mai 2026*
+*Dernière mise à jour: 2026-06-07*
 *Stack validée: Next.js 14 + Supabase + Clerk + Gemini + Resend + Vercel*
 *Tout agent modifiant ce fichier doit mettre à jour la date ci-dessus.*
