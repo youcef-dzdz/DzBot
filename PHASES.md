@@ -32,7 +32,7 @@ Stack: Next.js 14 + Supabase + Clerk + Gemini + Resend + Vercel
 - [ ] Créer projet Supabase + activer pgvector
 - [ ] Configurer `.env.local` + `.env.example`
 - [ ] Configurer `.gitignore`
-- [ ] Configurer i18n (fr.json, en.json, ar.json)
+- [x] Configurer i18n (fr.json, en.json, ar.json)
 - [ ] Créer la structure complète des dossiers
 - [ ] Configurer `middleware.ts` Clerk
 - [ ] Déployer sur Vercel (version vide)
@@ -59,7 +59,7 @@ Stack: Next.js 14 + Supabase + Clerk + Gemini + Resend + Vercel
 - [x] CTA final
 - [x] Footer avec langues
 - [x] Responsive mobile + desktop
-- [ ] Trilingue (fr/ar/en) — i18n non câblé, prochaine tâche
+- [x] Trilingue (fr/ar/en) — LanguageContext + LanguageSwitcher + RTL arabe ✅
 
 ### Gate 0 Sign-off ✅
 - [ ] `npm run build` — 0 erreurs

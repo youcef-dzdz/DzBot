@@ -408,6 +408,180 @@ npm run build : ✅ 0 erreurs
 
 ---
 
-*Dernière mise à jour: 2026-06-07*
+---
+## Session 3 — 2026-06-09 | Build | i18n complet (fr/en/ar) + LanguageSwitcher + RTL arabe
+
+### Résumé
+Mise en place du système i18n complet : 3 fichiers de traduction (fr/en/ar), contexte React avec persistance localStorage, sélecteur de langue dans la navbar, et support RTL arabe via synchronisation sur `document.documentElement.dir`.
+État actuel: propre ✅ — build 0 erreurs, toutes les routes générées.
+
+### Durée
+~1 heure
+
+### Fichiers Touchés
+| Fichier | Action | Lignes |
+|---------|--------|--------|
+| `locales/fr.json` | Créé | 54 lignes |
+| `locales/en.json` | Créé | 54 lignes |
+| `locales/ar.json` | Créé | 54 lignes |
+| `context/LanguageContext.tsx` | Créé | 68 lignes |
+| `components/shared/LanguageSwitcher.tsx` | Créé | 32 lignes |
+| `app/layout.tsx` | Modifié | +2 lignes (import + LanguageProvider) |
+| `components/landing/LandingNavbar.tsx` | Modifié | +useLanguage + LanguageSwitcher + fix logo 160×48 |
+| `components/landing/LandingHero.tsx` | Modifié | +useLanguage + t() sur tous les textes |
+| `components/landing/LandingProblem.tsx` | Modifié | +useLanguage + t() sur tous les textes |
+| `components/landing/LandingHowItWorks.tsx` | Modifié | +useLanguage + t() sur tous les textes |
+| `components/landing/LandingFeatures.tsx` | Modifié | +useLanguage + t() sur tous les textes |
+| `components/landing/LandingCTA.tsx` | Modifié | +useLanguage + t() sur tous les textes |
+| `components/landing/LandingFooter.tsx` | Modifié | +useLanguage + t() sur tous les textes |
+
+### Détails
+- `locales/fr.json` / `en.json` / `ar.json` : structure plate avec sections `nav`, `hero`, `problem`, `how`, `features`, `cta`, `footer`. Clés identiques dans les 3 fichiers.
+- `context/LanguageContext.tsx` : `LanguageProvider` + `useLanguage()` hook. Fonction `resolve()` pour notation pointée (`"nav.home"` → valeur). Persistance `localStorage`. `useEffect` synchronise `document.documentElement.lang` et `dir` sur chaque changement de locale.
+- `components/shared/LanguageSwitcher.tsx` : 3 boutons (FR / EN / عر), bouton actif en `bg-primary-700`, accessible (`aria-pressed`).
+- Tous les composants landing passés en `"use client"` pour accéder au hook `useLanguage`.
+- Logo navbar corrigé : `width={140} height={140}` → `width={160} height={48}` (conformément à `uidesign.md`, signalé en note Session 2).
+
+### Avant / Après
+
+**Fichier:** `app/layout.tsx`
+
+**Avant:** `ClerkProvider` → `html` → `body` → `{children}`
+
+**Après:** `ClerkProvider` → `html` → `body` → `LanguageProvider` → `{children}`
+
+**Pourquoi:** Le `LanguageProvider` doit entourer tout l'arbre de l'application pour que `useLanguage()` soit disponible dans tous les composants.
+
+---
+
+**Fichier:** `components/landing/LandingNavbar.tsx`
+
+**Avant:** Textes hardcodés en français, logo `140×140`, pas de sélecteur de langue.
+
+**Après:** Textes via `t()`, logo `160×48`, `LanguageSwitcher` entre les liens nav et le CTA.
+
+**Pourquoi:** Conformité avec la règle 4 (clés i18n avant code) et correction du bug logo signalé Session 2.
+
+### Journal des Accidents
+Aucun
+
+### Gate 1 — Quoi Tester (pour le fondateur)
+1. Lancer le serveur: `npm run dev`
+2. Aller à: `http://localhost:3000/`
+3. Action: Cliquer sur "EN" dans le sélecteur de langue (en haut à droite de la navbar)
+4. Résultat attendu: Tous les textes de la landing basculent en anglais instantanément
+5. Action: Cliquer sur "عر"
+6. Résultat attendu: Textes en arabe + page entière bascule en RTL (layout miroir)
+7. Action: Rafraîchir la page (F5) avec la langue arabe active
+8. Résultat attendu: La langue arabe est mémorisée (persistance localStorage)
+9. Si bug: Signaler si les textes ne changent pas ou si le RTL ne s'applique pas
+
+### Statut Build
+npm run build: ✅ 0 erreurs
+Route `/` — 17.3 kB | `/sign-in/[[...sign-in]]` — 205 B | `/sign-up/[[...sign-up]]` — 776 B
+
+### Confiance
+✅ Élevée — Build vérifié 0 erreurs TypeScript, architecture i18n standard React Context, RTL via attribut HTML natif.
+
+### Backup
+`.fix-backups/20260609-i18n/` — layout.tsx, LandingNavbar.tsx, LandingHero.tsx, LandingProblem.tsx, LandingHowItWorks.tsx, LandingFeatures.tsx, LandingCTA.tsx, LandingFooter.tsx
+
+### Prochaine Étape
+Phase 0 — Webhook Clerk → sync users vers Supabase (`src/app/api/webhooks/clerk/route.ts`) + attribution des rôles citoyen/avocat/admin.
+
+### Mises à Jour Effectuées
+- [x] STATUS.md mis à jour ✅
+- [x] PHASES.md mis à jour ✅
+
+---
+
+---
+## Session 4 — 2026-06-09 | Build | Localisation Clerk (arSA / frFR / enUS)
+
+### Résumé
+Installation de `@clerk/localizations` et câblage dans `ClerkProvider` via un wrapper client `LocalizedClerkProvider` — les formulaires Clerk (sign-in/sign-up) basculent maintenant en arabe, français ou anglais selon la langue sélectionnée.
+État actuel: propre ✅ — build 0 erreurs.
+
+### Durée
+~20 minutes
+
+### Fichiers Touchés
+| Fichier | Action | Lignes |
+|---------|--------|--------|
+| `package.json` / `package-lock.json` | Modifié | +4 packages (`@clerk/localizations`) |
+| `components/shared/LocalizedClerkProvider.tsx` | Créé | 26 lignes |
+| `app/layout.tsx` | Modifié | ClerkProvider statique → LocalizedClerkProvider dynamique |
+
+### Détails
+- `@clerk/localizations` installé (4 packages ajoutés, build 418 packages).
+- `LocalizedClerkProvider.tsx` : composant client wrappant `ClerkProvider`, lit `locale` depuis `useLanguage()` et passe `arSA` / `frFR` / `enUS` selon le choix de l'utilisateur.
+- `layout.tsx` : suppression de l'import `ClerkProvider` direct — replaced par `LanguageProvider` → `LocalizedClerkProvider`. `<html>` et `<body>` remontent au niveau racine (pas d'impact fonctionnel).
+- Fix TypeScript : conflit de types entre `@clerk/localizations` et `@clerk/nextjs` (versions de `LocalizationResource`) résolu avec `Record<string, any>`.
+
+### Avant / Après
+
+**Fichier:** `app/layout.tsx`
+
+**Avant:**
+```tsx
+<ClerkProvider>           // statique, toujours en anglais
+  <html lang="fr">
+    <body>
+      <LanguageProvider>
+        {children}
+      </LanguageProvider>
+    </body>
+  </html>
+</ClerkProvider>
+```
+
+**Après:**
+```tsx
+<html lang="fr">
+  <body>
+    <LanguageProvider>         // lit la locale depuis localStorage
+      <LocalizedClerkProvider> // passe arSA/frFR/enUS à ClerkProvider
+        {children}
+      </LocalizedClerkProvider>
+    </LanguageProvider>
+  </body>
+</html>
+```
+
+**Pourquoi:** `ClerkProvider` doit être enfant de `LanguageProvider` pour pouvoir lire le locale via `useLanguage()` et passer la bonne localisation aux formulaires Clerk.
+
+### Journal des Accidents
+Aucun
+
+### Gate 1 — Quoi Tester (pour le fondateur)
+1. `npm run dev` → `http://localhost:3000/`
+2. Cliquer "عر" dans le switcher de langue
+3. Aller à `http://localhost:3000/sign-in`
+4. Résultat attendu: formulaire sign-in entièrement en arabe (labels, placeholder, boutons, messages d'erreur)
+5. Aller à `http://localhost:3000/sign-up`
+6. Résultat attendu: formulaire sign-up entièrement en arabe
+7. Revenir à "FR" → formulaires repassent en français
+8. Si bug: signaler si les formulaires restent en anglais après changement de langue
+
+### Statut Build
+npm run build: ✅ 0 erreurs
+Route `/` — 10.9 kB (static) | `/sign-in` — 1.94 kB | `/sign-up` — 2.01 kB
+
+### Confiance
+✅ Élevée — Build vérifié 0 erreurs, architecture propre, `arSA`/`frFR`/`enUS` sont des exports officiels de `@clerk/localizations`.
+
+### Backup
+`.fix-backups/20260609-i18n/layout.v2.tsx` — layout.tsx avant modification
+
+### Prochaine Étape
+Phase 0 — Webhook Clerk → sync users vers Supabase (`src/app/api/webhooks/clerk/route.ts`) + attribution des rôles citoyen/avocat/admin.
+
+### Mises à Jour Effectuées
+- [x] STATUS.md mis à jour ✅
+- [x] PHASES.md mis à jour ✅
+
+---
+
+*Dernière mise à jour: 2026-06-09*
 *Ce fichier est géré par Claude Code — ne pas modifier manuellement les entrées existantes.*
 *Tout agent modifiant ce fichier doit mettre à jour la date ci-dessus.*

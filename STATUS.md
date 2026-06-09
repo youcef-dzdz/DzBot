@@ -22,7 +22,7 @@ Dernière mise à jour: 2026-06-07
 ## 🎯 Focus Actuel
 
 **Phase:** Phase 0 — Setup + Landing + Auth
-**Statut:** 🔄 En cours (~40%)
+**Statut:** 🔄 En cours (~60%)
 
 **Prochaine action concrète:**
 1. ~~Installer Node.js~~ ✅
@@ -31,7 +31,8 @@ Dernière mise à jour: 2026-06-07
 4. ~~Créer la page sign-in~~ ✅
 5. ~~Créer la page sign-up~~ ✅
 6. ~~Créer la landing page~~ ✅
-7. Câbler i18n (switcher fr/ar/en) + corriger les liens de navigation
+7. ~~Câbler i18n (switcher fr/ar/en) + RTL arabe~~ ✅
+8. Webhook Clerk → sync users vers Supabase (`/api/webhooks/clerk`)
 
 **Bloqué par:** Rien
 
@@ -67,9 +68,9 @@ Dernière mise à jour: 2026-06-07
 
 | Item | Valeur |
 |------|--------|
-| Date | 2026-06-07 |
-| Tâche | Landing page (7 sections) + pages auth sign-in/sign-up |
-| Fichiers | `app/page.tsx`, `app/(auth)/sign-in/[[...sign-in]]/page.tsx`, `app/(auth)/sign-up/[[...sign-up]]/page.tsx`, `components/landing/*.tsx`, `public/logo.png` |
+| Date | 2026-06-09 |
+| Tâche | Localisation Clerk (arSA/frFR/enUS) — formulaires sign-in/sign-up multilingues |
+| Fichiers | `components/shared/LocalizedClerkProvider.tsx`, `app/layout.tsx`, `package.json` |
 | Statut | ✅ Terminé — build 0 erreurs |
 
 ---
@@ -79,8 +80,8 @@ Dernière mise à jour: 2026-06-07
 | Item | Valeur |
 |------|--------|
 | Phase | 0 |
-| Tâche | i18n (switcher fr/ar/en) + corriger les liens de navigation |
-| Durée estimée | — |
+| Tâche | Webhook Clerk → sync users vers Supabase (`/api/webhooks/clerk`) + attribution des rôles |
+| Durée estimée | ~1h |
 | Bloqué par | Rien |
 
 ---
@@ -89,8 +90,7 @@ Dernière mise à jour: 2026-06-07
 
 | # | Description | Priorité |
 |---|-------------|---------|
-| 1 | i18n manquant — UI uniquement en français | 🟡 Important |
-| 2 | Support RTL arabe absent | 🟡 Important |
+| — | Aucun bug connu | — |
 
 ## ✅ Correctifs Appliqués
 
@@ -121,7 +121,7 @@ Dernière mise à jour: 2026-06-07
 
 | Item | Statut |
 |------|--------|
-| Frontend (npm run build) | ✅ 0 erreurs — 2026-06-07 (vérifié) |
+| Frontend (npm run build) | ✅ 0 erreurs — 2026-06-09 (vérifié) |
 | Vercel Deployment | ❌ Non configuré |
 | Supabase Migrations | ❌ Non exécutées |
 | Dernière vérification | 2026-06-07 |

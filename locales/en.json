@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Home",
+    "features": "Features",
+    "how_it_works": "How it works",
+    "sign_in": "Sign in",
+    "cta": "Start for free"
+  },
+  "hero": {
+    "badge": "Algerian LegalTech Platform",
+    "title": "Your rights, explained simply",
+    "subtitle": "LegalBot DZ analyzes your legal questions and guides you with Algerian laws — in French, Arabic, or Darija.",
+    "cta_primary": "Ask a question",
+    "cta_secondary": "See how it works"
+  },
+  "problem": {
+    "title": "Why LegalBot DZ?",
+    "item1_title": "Algerian law is complex",
+    "item1_desc": "Legal texts are difficult to understand without specialized training.",
+    "item2_title": "Consultations are expensive",
+    "item2_desc": "An appointment with a lawyer is a barrier for many citizens.",
+    "item3_title": "Time is precious",
+    "item3_desc": "Waiting weeks for a legal answer can worsen your situation."
+  },
+  "how": {
+    "title": "Simple, fast, reliable",
+    "step1_title": "Ask your question",
+    "step1_desc": "In French, Arabic or Darija — LegalBot understands all languages.",
+    "step2_title": "The AI analyzes and searches",
+    "step2_desc": "Our agent consults Algerian laws and finds the relevant articles.",
+    "step3_title": "Receive your answer",
+    "step3_desc": "A clear response with cited legal sources and a liability disclaimer."
+  },
+  "features": {
+    "title": "For citizens and professionals",
+    "citizen_label": "Citizen",
+    "lawyer_label": "Lawyer",
+    "citizen_f1": "Multilingual AI chat",
+    "citizen_f2": "Document generation",
+    "citizen_f3": "Lawyer suggestions",
+    "citizen_f4": "Conversation history",
+    "lawyer_f1": "Case management",
+    "lawyer_f2": "AI brief generation",
+    "lawyer_f3": "Hearing reminders",
+    "lawyer_f4": "Dashboard"
+  },
+  "cta": {
+    "title": "Ready to understand your rights?",
+    "subtitle": "Join LegalBot DZ — free to start.",
+    "button": "Create my account"
+  },
+  "footer": {
+    "home": "Home",
+    "sign_in": "Sign in",
+    "sign_up": "Register",
+    "copyright": "© 2025 LegalBot DZ — Algerian LegalTech Platform",
+    "disclaimer": "LegalBot DZ provides legal information for informational purposes only. It does not replace a lawyer."
+  }
+}

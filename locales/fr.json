@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "features": "Fonctionnalités",
+    "how_it_works": "Comment ça marche",
+    "sign_in": "Connexion",
+    "cta": "Commencer gratuitement"
+  },
+  "hero": {
+    "badge": "Plateforme LegalTech Algérienne",
+    "title": "Vos droits, expliqués simplement",
+    "subtitle": "LegalBot DZ analyse vos questions juridiques et vous guide avec les lois algériennes — en français, arabe ou darija.",
+    "cta_primary": "Poser une question",
+    "cta_secondary": "Voir comment ça marche"
+  },
+  "problem": {
+    "title": "Pourquoi LegalBot DZ ?",
+    "item1_title": "Le droit algérien est complexe",
+    "item1_desc": "Les textes juridiques sont difficiles à comprendre sans formation spécialisée.",
+    "item2_title": "Les consultations coûtent cher",
+    "item2_desc": "Un rendez-vous chez un avocat représente une barrière pour beaucoup de citoyens.",
+    "item3_title": "Le temps est précieux",
+    "item3_desc": "Attendre des semaines pour une réponse juridique peut aggraver votre situation."
+  },
+  "how": {
+    "title": "Simple, rapide, fiable",
+    "step1_title": "Posez votre question",
+    "step1_desc": "En français, arabe ou darija — LegalBot comprend toutes les langues.",
+    "step2_title": "L'IA analyse et cherche",
+    "step2_desc": "Notre agent consulte les lois algériennes et trouve les articles pertinents.",
+    "step3_title": "Recevez votre réponse",
+    "step3_desc": "Une réponse claire avec les sources juridiques citées et un avertissement de responsabilité."
+  },
+  "features": {
+    "title": "Pour les citoyens et les professionnels",
+    "citizen_label": "Citoyen",
+    "lawyer_label": "Avocat",
+    "citizen_f1": "Chat IA multilingue",
+    "citizen_f2": "Génération de documents",
+    "citizen_f3": "Suggestion d'avocats",
+    "citizen_f4": "Historique des conversations",
+    "lawyer_f1": "Gestion de dossiers",
+    "lawyer_f2": "Génération de requêtes IA",
+    "lawyer_f3": "Rappels d'audiences",
+    "lawyer_f4": "Tableau de bord"
+  },
+  "cta": {
+    "title": "Prêt à comprendre vos droits ?",
+    "subtitle": "Rejoignez LegalBot DZ — gratuit pour commencer.",
+    "button": "Créer mon compte"
+  },
+  "footer": {
+    "home": "Accueil",
+    "sign_in": "Connexion",
+    "sign_up": "Inscription",
+    "copyright": "© 2025 LegalBot DZ — Plateforme LegalTech Algérienne",
+    "disclaimer": "LegalBot DZ fournit des informations juridiques à titre informatif uniquement. Il ne remplace pas un avocat."
+  }
+}

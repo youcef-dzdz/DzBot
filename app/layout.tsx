@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ClerkProvider } from '@clerk/nextjs'
+import { LanguageProvider } from '@/context/LanguageContext'
+import LocalizedClerkProvider from '@/components/shared/LocalizedClerkProvider'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -16,12 +17,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
-      <html lang="fr">
-        <body className={inter.className}>
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="fr">
+      <body className={inter.className}>
+        <LanguageProvider>
+          <LocalizedClerkProvider>
+            {children}
+          </LocalizedClerkProvider>
+        </LanguageProvider>
+      </body>
+    </html>
   )
 }
