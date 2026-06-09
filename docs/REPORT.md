@@ -88,3 +88,54 @@ CLERK_WEBHOOK_SECRET=           # requis — signing secret du webhook Clerk (wh
    ```
 
 ---
+
+## [2026-06-10 — Session 2] Gate 2 — Validation webhook + Mise à jour documentation
+
+### Avant
+| Item | État |
+|------|------|
+| `docs/STATUS.md` | Absent |
+| `docs/PHASES.md` | Absent |
+| Gate 2 webhook | Non validé |
+| Phase 0 | Non marquée 100% |
+
+### Après
+| Item | État |
+|------|------|
+| `docs/STATUS.md` | Créé — état courant du projet |
+| `docs/PHASES.md` | Créé — feuille de route complète 7 phases |
+| Gate 2 webhook | ✅ Validé |
+| Phase 0 | ✅ 100% complète |
+
+### Fichiers modifiés
+| Fichier | Action | Raison |
+|---------|--------|--------|
+| `docs/STATUS.md` | Créé | Tableau de bord session start protocol |
+| `docs/PHASES.md` | Créé | Feuille de route 7 phases avec tâches détaillées |
+| `docs/REPORT.md` | Modifié | Ajout entrée Gate 2 (cette entrée) |
+
+### Journal des accidents
+Aucun.
+
+### Résultat du test Gate 2 — Webhook
+
+| Champ | Valeur |
+|-------|--------|
+| Email inséré | `mokhtari.yusif@gmail.com` |
+| Table | `users` |
+| `role` | `citoyen` |
+| `clerk_id` | Présent |
+| `nom` | Présent |
+| Signature svix | Vérifiée ✅ |
+| Code retour | `200 { recu: true }` |
+
+**Conclusion :** Le webhook Clerk → Supabase est opérationnel en production. Phase 0 validée à 100%.
+
+### État des phases après cette session
+| Phase | Progression |
+|-------|-------------|
+| Phase 0 — Infrastructure & Auth | ✅ 100% |
+| Phase 1 — Portail Citoyen (Chat RAG) | 🔄 0% — prochaine |
+| Phases 2–6 | ⏳ En attente |
+
+---
